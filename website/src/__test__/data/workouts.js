@@ -1,4 +1,4 @@
-export const sessions = [{
+export const workouts = [{
     id: 1,
     personId: 1
 }];
