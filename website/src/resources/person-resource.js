@@ -15,7 +15,7 @@ export const fetchAll = async (): Promise<Array<Person>> => {
     return response.data.persons;
 }
 
-export const fetchAllPersonWorkouts = async (personId: number): Promise<Array<Session>> => {
+export const fetchAllWorkouts = async (personId: number): Promise<Array<Session>> => {
     const response = await axios.get(`${PERSON_COLLECTION}/${personId}/${WORKOUT_COLLECTION}`)
     return response.data.sessions;
 };

@@ -89,7 +89,7 @@ describe('fetch all workouts', () => {
     it(`requests sessions for person from '${PERSON_COLLECTION}/{id}/${WORKOUT_COLLECTION}'`, async () => {
         const scope = createScope(VALID_ID);
 
-        const workouts = await personsResource.fetchAllPersonWorkouts(VALID_ID);
+        const workouts = await personsResource.fetchAllWorkouts(VALID_ID);
 
         expect(scope.isDone()).toBe(true);
     });
@@ -97,7 +97,7 @@ describe('fetch all workouts', () => {
     it('can find workouts - returns an array of workouts', async () => {
         const scope = createScope(VALID_ID);
 
-        const sessions = await personsResource.fetchAllPersonWorkouts(VALID_ID);
+        const sessions = await personsResource.fetchAllWorkouts(VALID_ID);
 
         expect(sessions).toEqual(
             testWorkouts.map(session => expect.objectContaining(session))
@@ -107,7 +107,7 @@ describe('fetch all workouts', () => {
     it('cannot find workouts - returns an empty array', async () => {
         const scope = createScope(INVALID_ID);
 
-        const sessions = await personsResource.fetchAllPersonWorkouts(INVALID_ID);
+        const sessions = await personsResource.fetchAllWorkouts(INVALID_ID);
 
         expect(sessions).toHaveLength(0);
     });
