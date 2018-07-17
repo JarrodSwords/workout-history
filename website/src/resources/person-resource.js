@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { API_ROOT } from 'appdata';
+import { API_ROOT } from 'data';
 
 export const PERSON_RESOURCE = 'persons',
     PERSON_COLLECTION = `/${API_ROOT}/${PERSON_RESOURCE}`,
     WORKOUT_COLLECTION = 'workouts';
 
-export const fetch = async (id: number): Promise<Person> => {
-    const response = await axios.get(`${PERSON_COLLECTION}/${id}`);
+export const fetch = async (personId: number): Promise<Person> => {
+    const response = await axios.get(`${PERSON_COLLECTION}/${personId}`);
     return response.data.person || null;
 }
 

@@ -8,7 +8,11 @@
     "nock": "^9.4.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "react-test-renderer": "^16.4.1",
+    "redux": "^4.0.0",
+    "reselect": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,5 @@
-import { API_ROOT, HOST } from 'appdata';
 import axios from 'axios';
+import { API_ROOT, HOST } from 'data';
 import nock from 'nock';
 import { persons as testPersons } from '__test__/data/persons';
 import { workouts as testWorkouts } from '__test__/data/workouts';
@@ -11,13 +11,13 @@ const INVALID_ID = 0,
 
 describe('fetch', () => {
 
-    const createScope = (id: number = 0) =>
-        nock(HOST).get(`${PERSON_COLLECTION}/${id}`)
+    const createScope = (personId: number = 0) =>
+        nock(HOST).get(`${PERSON_COLLECTION}/${personId}`)
             .reply(200, {
-                person: testPersons.find(person => person.id === id)
+                person: testPersons.find(person => person.id === personId)
             });
 
-    it(`requests a person from '${PERSON_COLLECTION}/{id}'`, async () => {
+    it(`requests a person from '${PERSON_COLLECTION}/{personId}'`, async () => {
         const scope = createScope(VALID_ID);
 
         const person = await personsResource.fetch(VALID_ID);
@@ -86,7 +86,7 @@ describe('fetch all workouts', () => {
                 sessions: testWorkouts.filter(workout => workout.personId === personId)
             });
 
-    it(`requests sessions for person from '${PERSON_COLLECTION}/{id}/${WORKOUT_COLLECTION}'`, async () => {
+    it(`requests workouts from '${PERSON_COLLECTION}/{personId}/${WORKOUT_COLLECTION}'`, async () => {
         const scope = createScope(VALID_ID);
 
         const workouts = await personsResource.fetchAllWorkouts(VALID_ID);
@@ -99,9 +99,7 @@ describe('fetch all workouts', () => {
 
         const sessions = await personsResource.fetchAllWorkouts(VALID_ID);
 
-        expect(sessions).toEqual(
-            testWorkouts.map(session => expect.objectContaining(session))
-        );
+        expect(sessions).toEqual(testWorkouts.map(session => expect.objectContaining(session)));
     });
 
     it('cannot find workouts - returns an empty array', async () => {
