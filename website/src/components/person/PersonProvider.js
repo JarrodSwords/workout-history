@@ -1,12 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import * as personResource from 'resources/person-resource';
 
-export const mapStateToProps = (state, ownProps) => {
-    return {
-        
+export class PersonProvider extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { person: null };
     }
-};
 
-export const PersonProvider = connect(
-    mapStateToProps
-);
+    componentDidMount() {
+        const { personId } = this.props;
+        personResource.fetch(personId)
+            .then(person => {
+                this.setState({ person });
+            })
+            .catch(err => {
+                console.log(err.message)
+            });
+    }
+
+    render() {
+        return <div>
+            {this.props.render(this.state)}
+        </div>;
+    }
+}

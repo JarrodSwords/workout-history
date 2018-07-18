@@ -1,8 +1,10 @@
 import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { reducer } from './reducer';
 
 export const configureStore = () => {
     return createStore(
-        reducer
+        reducer,
+        applyMiddleware(thunk)
     );
 };
